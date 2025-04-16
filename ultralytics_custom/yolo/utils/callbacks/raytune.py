@@ -8,7 +8,7 @@ except (ImportError, AssertionError):
 
 def on_fit_epoch_end(trainer):
     """Sends training metrics to Ray Tune at end of each epoch."""
-    if session._get_session() is not None:
+    if session.get_session() is not None:
         metrics = trainer.metrics
         metrics['epoch'] = trainer.epoch
         session.report(metrics)
